@@ -151,6 +151,11 @@ class BallGame {
   startGame() {
     if (this.isPlaying) return;
 
+    // Only scroll on mobile devices
+    if (window.innerWidth <= 768) {
+      this.gameArea.scrollIntoView({ behavior: "smooth" });
+    }
+
     // Reset game state
     this.isPlaying = true;
     this.score = this.combo = 0;
