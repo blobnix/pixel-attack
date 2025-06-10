@@ -1,12 +1,9 @@
 # 🎮 Pixel Attack
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Made with JavaScript](https://img.shields.io/badge/Made%20with-JavaScript-yellow)](https://www.javascript.com)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-green)](https://github.com/blobpetal/pixel-attack)
 
 A retro-style pixel art balls clicking game with power-ups, combos, and dynamic effects. Built with vanilla JavaScript, HTML, and CSS.
-
-![Pixel Attack Game](https://raw.githubusercontent.com/blobpetal/pixel-attack/main/screenshot.png)
 
 Play Pixel Attact: https://pixel-attack.netlify.app
 
@@ -51,31 +48,6 @@ Play Pixel Attact: https://pixel-attack.netlify.app
    git clone https://github.com/blobpetal/pixel-attack.git
    ```
 
-2. Open `index.html` in your browser or use a local server:
-
-   ```bash
-   # Using Python
-   python -m http.server 8000
-
-   # Using Node.js
-   npx serve
-   ```
-
-3. Start playing! 🎮
-
-## 🎨 Customization
-
-The game uses CSS custom properties for easy customization:
-
-```css
-:root {
-  --accent-color: #4caf50;
-  --pixel-size: 4px;
-  --grid-size: 16px;
-  /* More variables in styles.css */
-}
-```
-
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
@@ -88,11 +60,11 @@ Contributions are welcome! Feel free to:
 
 ## 📝 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and available under the [License](LICENSE).
 
 ## 👨‍💻 Author
 
-- **Blob** - [GitHub Profile](https://github.com/blobpetal)
+- [**Blob**](https://github.com/blobpetal)
 
 ## 🙏 Acknowledgments
 
