@@ -9,14 +9,12 @@ Play Pixel Attact: https://pixel-attack.netlify.app
 
 ## ✨ Features
 
-- 🎯 Pixel-perfect clicking mechanics
-- ⚡ Dynamic power-ups (Time Freeze, Strike, Bomb)
+- ⚡ Dynamic power-ups (+3 Second Time, Strike, Bomb)
 - 🔥 Combo system with multipliers
 - 🌓 Light/Dark theme support
 - 🎨 Retro pixel art style
 - 📱 Responsive design
 - 🏆 High score tracking
-- 🎮 Custom pixel cursor
 
 ## 🎮 How to Play
 
@@ -70,7 +68,6 @@ This project is open source and available under the [License](LICENSE).
 
 - Inspired by classic arcade games
 - Built with pixel art aesthetics in mind
-- Thanks to all contributors and players!
 
 ---
 
