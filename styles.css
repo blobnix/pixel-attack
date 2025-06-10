@@ -245,11 +245,10 @@ h1 {
   background: var(--bg-primary);
   margin: var(--grid-size) 0;
   border-radius: 0;
-  cursor: none;
+  cursor: crosshair;
   --cursor-x: 0px;
   --cursor-y: 0px;
-  --cursor-opacity: 0;
-  box-shadow: var(--pixel-size) var(--pixel-size) 0 var(--shadow-color);
+  scroll-margin-top: 20px;
 }
 
 .ball {
@@ -650,4 +649,57 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: calc(var(--grid-size) / 2);
+}
+
+/* Add smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  #gameArea {
+    cursor: auto;
+  }
+
+  #gameArea::after {
+    display: none;
+  }
+
+  #gameArea::before {
+    display: none;
+  }
+
+  .container {
+    padding: var(--grid-size);
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .game-stats {
+    grid-template-columns: 1fr;
+    gap: calc(var(--grid-size) / 2);
+  }
+
+  .stat-box {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .game-info {
+    grid-template-columns: 1fr;
+    gap: calc(var(--grid-size) / 2);
+  }
+
+  .game-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .glow-button {
+    width: 100%;
+  }
 }
