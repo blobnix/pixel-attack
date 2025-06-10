@@ -62,7 +62,7 @@ This project is open source and available under the [License](LICENSE).
 
 ## 👨‍💻 Author
 
-- [**Blob**](https://github.com/blobpetal)
+- [**Blob**](https://github.com/blobnix)
 
 ## 🙏 Acknowledgments
 
