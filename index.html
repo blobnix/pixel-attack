@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Attack</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <button class="theme-switch" id="themeSwitch">
+      <i class="fas fa-moon"></i>
+    </button>
+    <div class="container">
+      <div class="game-header">
+        <h1>Pixel Attack</h1>
+        <div class="game-stats">
+          <div class="stat-box">
+            <i class="fas fa-trophy"></i>
+            <span>High Score: <span id="highScore">0</span></span>
+          </div>
+          <div class="stat-box">
+            <i class="fas fa-bolt"></i>
+            <span>Best Combo: <span id="bestCombo">0</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-info">
+        <div class="score">Score: <span id="score">0</span></div>
+        <div class="timer">Time: <span id="time">30</span>s</div>
+        <div class="combo">Combo: <span id="combo">0</span>x</div>
+      </div>
+
+      <div class="game-controls">
+        <button class="glow-button" id="startButton">
+          <i class="fas fa-play"></i> Start Game
+        </button>
+        <button class="info-button" id="instructionsButton">
+          <i class="fas fa-info"></i>
+        </button>
+      </div>
+
+      <div id="gameArea"></div>
+
+      <div id="gameOver" style="display: none">
+        <h2>Game Over!</h2>
+        <div class="final-stats">
+          <p>Final Score: <span id="finalScore">0</span></p>
+          <p>Final Combo: <span id="finalCombo">0</span>x</p>
+        </div>
+        <button class="glow-button" id="restartButton">
+          <i class="fas fa-redo"></i> Play Again
+        </button>
+      </div>
+    </div>
+
+    <div id="instructions" style="display: none">
+      <div class="instructions-content">
+        <h2>How to Play</h2>
+        <div class="ball-types">
+          <div class="ball-type">
+            <div class="ball-preview" style="background-color: #ff6b6b">
+              <i class="fas fa-circle"></i>
+            </div>
+            <div>
+              <div>Normal Ball</div>
+              <small>3 points</small>
+            </div>
+          </div>
+          <div class="ball-type">
+            <div class="ball-preview" style="background-color: #4ecdc4">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div>
+              <div>Small Ball</div>
+              <small>5 points</small>
+            </div>
+          </div>
+          <div class="ball-type">
+            <div class="ball-preview" style="background-color: #45b7d1"></div>
+            <div>
+              <div>Large Ball</div>
+              <small>1 point</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="powerups">
+          <h3><i class="fas fa-star"></i> Power-ups</h3>
+          <ul>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>Time Freeze: Adds 3 seconds to the timer</span>
+            </li>
+            <li>
+              <i class="fas fa-bolt"></i>
+              <span>Strike: Collects all non-bomb balls on screen</span>
+            </li>
+            <li>
+              <i class="fas fa-bomb"></i>
+              <span>Bomb: Reduces time by 5 seconds</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tips">
+          <h3><i class="fas fa-lightbulb"></i> Tips & Tricks</h3>
+          <ul>
+            <li>
+              <i class="fas fa-bolt"></i>
+              <span
+                >Click balls quickly to build up your combo multiplier!</span
+              >
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>Prioritize time freeze balls when time is running low</span>
+            </li>
+            <li>
+              <i class="fas fa-bomb"></i>
+              <span>Avoid bomb balls at all costs!</span>
+            </li>
+            <li>
+              <i class="fas fa-star"></i>
+              <span
+                >Use the strike power-up strategically to clear the screen</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <button class="glow-button" id="closeInstructions">
+          <i class="fas fa-times"></i> Close
+        </button>
+      </div>
+    </div>
+
+    <footer class="game-footer">
+      <div class="footer-content">
+        <p>
+          <a href="https://github.com/blobpetal" target="_blank">
+            Made with <i class="fas fa-heart"></i> by blob
+          </a>
+        </p>
+        <p class="open-source">
+          <a href="https://github.com/blobpetal/pixel-attack" target="_blank">
+            <i class="fas fa-code"></i> Open Source
+            <i class="fab fa-github"></i>
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
