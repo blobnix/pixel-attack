@@ -245,7 +245,7 @@ h1 {
   background: var(--bg-primary);
   margin: var(--grid-size) 0;
   border-radius: 0;
-  cursor: crosshair;
+  cursor: none;
   --cursor-x: 0px;
   --cursor-y: 0px;
   scroll-margin-top: 20px;
@@ -264,19 +264,24 @@ h1 {
   place-items: center;
 }
 
-.ball:hover {
+.ball:active {
   transform: translate(var(--pixel-size), var(--pixel-size));
   box-shadow: none;
+}
+
+/* Remove the hover effect */
+.ball:hover {
+  transform: none;
+  box-shadow: var(--pixel-size) var(--pixel-size) 0 var(--shadow-color);
 }
 
 /* Custom Cursor */
 #gameArea::after {
   content: "";
   position: absolute;
-  width: calc(var(--grid-size));
-  height: calc(var(--grid-size));
-  background: transparent;
-  border: var(--pixel-size) solid var(--accent-color);
+  width: var(--pixel-size);
+  height: var(--pixel-size);
+  background: var(--accent-color);
   pointer-events: none;
   left: var(--cursor-x);
   top: var(--cursor-y);
@@ -288,19 +293,7 @@ h1 {
 }
 
 #gameArea::before {
-  content: "";
-  position: absolute;
-  width: var(--pixel-size);
-  height: var(--pixel-size);
-  background: var(--accent-color);
-  pointer-events: none;
-  left: calc(var(--cursor-x) + 0.5px);
-  top: calc(var(--cursor-y) + 0.5px);
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  opacity: var(--cursor-opacity);
-  transition: opacity 0.1s ease;
-  box-shadow: var(--pixel-size) var(--pixel-size) 0 var(--shadow-color);
+  display: none;
 }
 
 #gameOver {

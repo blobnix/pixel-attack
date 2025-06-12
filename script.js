@@ -68,14 +68,28 @@ class BallGame {
     // Cursor tracking
     this.gameArea.addEventListener("mousemove", (e) => {
       const rect = this.gameArea.getBoundingClientRect();
-      this.gameArea.style.setProperty(
-        "--cursor-x",
-        `${e.clientX - rect.left}px`
+      const pixelSize = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--pixel-size"
+        )
       );
-      this.gameArea.style.setProperty(
-        "--cursor-y",
-        `${e.clientY - rect.top}px`
-      );
+
+      // Calculate pixel-snapped coordinates with offset for better accuracy
+      const rawX = e.clientX - rect.left;
+      const rawY = e.clientY - rect.top;
+      const snappedX =
+        Math.floor((rawX + pixelSize / 2) / pixelSize) * pixelSize;
+      const snappedY =
+        Math.floor((rawY + pixelSize / 2) / pixelSize) * pixelSize;
+
+      // Ensure coordinates stay within game area bounds
+      const maxX = this.gameArea.clientWidth - pixelSize;
+      const maxY = this.gameArea.clientHeight - pixelSize;
+      const boundedX = Math.max(0, Math.min(snappedX, maxX));
+      const boundedY = Math.max(0, Math.min(snappedY, maxY));
+
+      this.gameArea.style.setProperty("--cursor-x", `${boundedX}px`);
+      this.gameArea.style.setProperty("--cursor-y", `${boundedY}px`);
       this.gameArea.style.setProperty("--cursor-opacity", "1");
     });
     this.gameArea.addEventListener("mouseleave", () =>
@@ -315,50 +329,74 @@ class BallGame {
       }
     }
 
-    ball.addEventListener("click", () => {
+    ball.addEventListener("click", (e) => {
       if (this.isPlaying) {
-        const now = Date.now();
-        const timeSinceLastClick = now - this.lastClickTime;
+        // Get the actual click position relative to the ball
+        const ballRect = ball.getBoundingClientRect();
+        const clickX = e.clientX - ballRect.left;
+        const clickY = e.clientY - ballRect.top;
 
-        if (timeSinceLastClick < 1000) {
-          this.combo++;
-          if (this.combo > this.bestCombo) {
-            this.bestCombo = this.combo;
-            this.bestComboElement.textContent = this.bestCombo;
-            localStorage.setItem("bestCombo", this.bestCombo);
+        // Calculate the center of the ball
+        const ballCenterX = ballRect.width / 2;
+        const ballCenterY = ballRect.height / 2;
+
+        // Calculate distance from click to ball center
+        const distance = Math.sqrt(
+          Math.pow(clickX - ballCenterX, 2) + Math.pow(clickY - ballCenterY, 2)
+        );
+
+        // Allow clicks within the ball's radius plus a small margin
+        const clickRadius = ballRect.width / 2 + 5;
+
+        if (distance <= clickRadius) {
+          const now = Date.now();
+          const timeSinceLastClick = now - this.lastClickTime;
+
+          if (timeSinceLastClick < 1000) {
+            this.combo++;
+            if (this.combo > this.bestCombo) {
+              this.bestCombo = this.combo;
+              this.bestComboElement.textContent = this.bestCombo;
+              localStorage.setItem("bestCombo", this.bestCombo);
+            }
+          } else {
+            this.combo = 1;
           }
-        } else {
-          this.combo = 1;
-        }
-        this.lastClickTime = now;
-        this.comboElement.textContent = this.combo;
+          this.lastClickTime = now;
+          this.comboElement.textContent = this.combo;
 
-        let points = selectedType.points;
-        if (
-          selectedType.type !== "normal" &&
-          selectedType.type !== "small" &&
-          selectedType.type !== "large"
-        ) {
-          this.activatePowerUp(selectedType.type);
-          points = 0; // Special balls don't give points
-        }
-
-        const comboMultiplier = Math.min(3, 1 + this.combo * 0.2);
-        const finalPoints = Math.floor(points * comboMultiplier);
-
-        this.score += finalPoints;
-        this.scoreElement.textContent = this.score;
-
-        this.createPointsPopup(posX, posY, finalPoints, this.combo > 1);
-
-        this.balls.delete(ball);
-        ball.remove();
-
-        setTimeout(() => {
-          if (this.isPlaying && this.balls.size < this.maxBalls) {
-            this.createBall();
+          let points = selectedType.points;
+          if (
+            selectedType.type !== "normal" &&
+            selectedType.type !== "small" &&
+            selectedType.type !== "large"
+          ) {
+            this.activatePowerUp(selectedType.type);
+            points = 0; // Special balls don't give points
           }
-        }, 300);
+
+          const comboMultiplier = Math.min(3, 1 + this.combo * 0.2);
+          const finalPoints = Math.floor(points * comboMultiplier);
+
+          this.score += finalPoints;
+          this.scoreElement.textContent = this.score;
+
+          this.createPointsPopup(
+            parseInt(ball.style.left),
+            parseInt(ball.style.top),
+            finalPoints,
+            this.combo > 1
+          );
+
+          this.balls.delete(ball);
+          ball.remove();
+
+          setTimeout(() => {
+            if (this.isPlaying && this.balls.size < this.maxBalls) {
+              this.createBall();
+            }
+          }, 300);
+        }
       }
     });
 
